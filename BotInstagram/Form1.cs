@@ -153,9 +153,7 @@ namespace BotInstagram
             {
                 //teste
                 cx.Show();
-
-                ex = erro.ToString();
-                this.DialogResult = DialogResult.OK;                
+            
                 drv.Navigate().Refresh();
                 Thread.Sleep(2000);
                 comentarios();

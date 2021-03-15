@@ -26,6 +26,7 @@ namespace BotInstagram
         [DllImport("kernel32.dll")]
         public static extern bool Beep(UInt32 frequency, UInt32 duration);
 
+        CaixaMsg cx = new CaixaMsg();
         ChromeDriver drv = new ChromeDriver(); Thread th;
         string url = "https://www.instagram.com";
         private void button1_Click(object sender, EventArgs e)
@@ -151,17 +152,17 @@ namespace BotInstagram
             catch (Exception erro)
             {
                 //teste
-                MessageBox.Show("Aguarde um momento para comentar novamente");
+                cx.Show();
+
                 ex = erro.ToString();
+                this.DialogResult = DialogResult.OK;                
                 drv.Navigate().Refresh();
                 Thread.Sleep(2000);
                 comentarios();
             }
 
         }
+        
+    }   
 
-    }        
-
-       
-    
 }

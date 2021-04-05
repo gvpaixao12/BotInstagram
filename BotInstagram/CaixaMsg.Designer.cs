@@ -35,10 +35,9 @@ namespace BotInstagram
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(105, 37);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(158, 57);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 25);
+            this.button1.Size = new System.Drawing.Size(68, 38);
             this.button1.TabIndex = 1;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
@@ -46,20 +45,21 @@ namespace BotInstagram
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(18, 18);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(258, 20);
+            this.textBox1.Size = new System.Drawing.Size(385, 26);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Aguarde um momento para comentar novamente";
             // 
             // CaixaMsg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(277, 68);
+            this.ClientSize = new System.Drawing.Size(416, 105);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "CaixaMsg";
             this.Text = "MessageBox";
             this.Load += new System.EventHandler(this.CaixaMsg_Load);

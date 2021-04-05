@@ -27,3 +27,8 @@ F:\VS\BotInstagram-main\BotInstagram\obj\Debug\BotInstagram.csproj.CopyComplete
 F:\VS\BotInstagram-main\BotInstagram\obj\Debug\BotInstagram.exe
 F:\VS\BotInstagram-main\BotInstagram\obj\Debug\BotInstagram.pdb
 F:\VS\BotInstagram-main\BotInstagram\obj\Debug\BotInstagram.CaixaMsg.resources
+D:\VS\BotInstagram\BotInstagram\obj\Debug\BotInstagram.CaixaMsg.resources
+D:\VS\BotInstagram\BotInstagram\bin\Debug\BotInstagram.exe.manifest
+D:\VS\BotInstagram\BotInstagram\bin\Debug\BotInstagram.application
+D:\VS\BotInstagram\BotInstagram\obj\Debug\BotInstagram.exe.manifest
+D:\VS\BotInstagram\BotInstagram\obj\Debug\BotInstagram.application

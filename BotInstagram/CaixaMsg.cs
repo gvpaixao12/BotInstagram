@@ -20,14 +20,16 @@ namespace BotInstagram
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
             Close();
         }
 
+        public string mensagem;
+
         private void CaixaMsg_Load(object sender, EventArgs e)
         {
-            Thread.Sleep(2000);
-            button1.PerformClick();
+            textBox1.Text = mensagem;
+            Thread.Sleep(4000);            
+           // button1.PerformClick();
         }
     }
 }

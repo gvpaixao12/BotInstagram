@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Runtime.InteropServices;
+using System.Diagnostics; 
 
 namespace BotInstagram
 {
@@ -29,21 +30,24 @@ namespace BotInstagram
         CaixaMsg cx = new CaixaMsg();
         ChromeDriver drv = new ChromeDriver(); Thread th;
         string url = "https://www.instagram.com";
+        string Caminhoinstrucoes = @"Instrucoes.txt";
         private void button1_Click(object sender, EventArgs e)
         {
-            //th = new Thread(Login_Instagram); th.Start();
-        }
-        DateTime dataFim = DateTime.Parse("22/03/2021");
+            //th = new Thread(Login_Instagram); th.Start();            
+        } 
         int horaini = DateTime.Now.Hour;
         int horaatu = 9;
         private void Form1_Load(object sender, EventArgs e)
-        {             
+        {
+            Process.Start("notepad", Caminhoinstrucoes);
+            LerArq();
+            drv.Navigate().GoToUrl(url);
+            th = new Thread(Login_Instagram);
+            DateTime dataFim = DateTime.Parse(dataSorteio);
             if (DateTime.Now.Date <= dataFim)
-            {                
-                if (horaini>horaatu)
-                {                    
-                    drv.Navigate().GoToUrl(url);
-                    th = new Thread(Login_Instagram);
+            {
+                if (horaini > horaatu)
+                {
                     WindowState = FormWindowState.Minimized;
                     th.Start();
                 }
@@ -59,7 +63,8 @@ namespace BotInstagram
 
         public string username;
         public string password;
-
+        public string dataSorteio;
+        public string linkPost;
         private void LerArq()
         {
             if (File.Exists("senhaBot.txt"))
@@ -72,6 +77,8 @@ namespace BotInstagram
                     string[] colunas = linha.Split(';');
                     username = colunas[0];
                     password = colunas[1];
+                    dataSorteio = colunas[2];
+                    linkPost = colunas[3];
                     linha = leitor.ReadLine();
                 }
                 leitor.Close();
@@ -80,8 +87,6 @@ namespace BotInstagram
         }
         private void Login_Instagram()
         {
-            LerArq();
-
             Thread.Sleep(3000);
             try
             {
@@ -97,27 +102,51 @@ namespace BotInstagram
             {
                 MessageBox.Show("Algo de errado aconteceu! " + erro);
             }
-            // Validação pós login
-            drv.FindElement(By.XPath("//button[@class = 'sqdOP yWX7d    y3zKF     ']")).Click(); Thread.Sleep(6000);
-            drv.FindElement(By.XPath("//button[@class = 'aOOlW   HoLwm ']")).Click(); Thread.Sleep(2000);
 
-            //ir para a pagina certa
-            drv.Navigate().GoToUrl("https://www.instagram.com/p/CLjvp9Igvmn/"); Thread.Sleep(2000);
+            string erroSenha = drv.FindElementByClassName("eiCW-").Text;
 
-            comentarios();
+            if (erroSenha != null)
+            {
+                //string aux = "Sua senha está inválida, tente alterar no arquivo";
+                //cx.mensagem = aux;
+                //cx.Show();
+                MessageBox.Show("Sua senha está inválida, tente alterar no arquivo");
+                drv.Close();
+                Close();          
+            }
+            else
+            {
+                // Validação pós login
+                drv.FindElement(By.XPath("//button[@class = 'sqdOP yWX7d    y3zKF     ']")).Click(); Thread.Sleep(6000);
+                drv.FindElement(By.XPath("//button[@class = 'aOOlW   HoLwm ']")).Click(); Thread.Sleep(2000);
 
+                // Ir para a pagina solicitada
+                try
+                {
+                    drv.Navigate().GoToUrl(linkPost); Thread.Sleep(2000);
+                    // Método sem retorno para escolha aleatória do comentário a ser digitado
+                    comentarios();
+                }
+                catch(Exception ex)
+                {
+
+                }
+                
+            }
             
         }
         public string ex = null;
+
+        #region Método de comentários
         private void comentarios()
         {
             string[] mensagens = new string[6];
-            mensagens[0] = "na altura da parachocada";
-            mensagens[1] = "bugador";
-            mensagens[2] = "Do futuro";
-            mensagens[3] = "Sem limites";
-            mensagens[4] = "Quem é lindo é ele";
-            mensagens[5] = "Esse carro vai ser meu";
+            mensagens[0] = "vou ganhar esse sorteio";
+            mensagens[1] = "já ta no papo";
+            mensagens[2] = "esse sorteio é meu";
+            mensagens[3] = "vou ganhar";
+            mensagens[4] = "vou ganhar =D";
+            mensagens[5] = "vou ganhar isso :D";
 
             string msgatual;
             Random r = new Random();
@@ -151,16 +180,17 @@ namespace BotInstagram
             }
             catch (Exception erro)
             {
-                //teste
-                cx.Show();
-            
+                
+                string aux = "Aguarde um momento para comentar novamente";
+                cx.mensagem = aux;
+                cx.Show();            
                 drv.Navigate().Refresh();
                 Thread.Sleep(2000);
                 comentarios();
             }
-
         }
-        
+        #endregion
+
     }   
 
 }
